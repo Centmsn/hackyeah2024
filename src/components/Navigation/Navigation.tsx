@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react";
 export const Navigation = () => {
   const navItems = [
     { name: "Twoja karta", path: "/" },
-    { name: "Ścieżki rozwoju", path: "/" },
+    { name: "Ścieżki rozwoju", path: "/paths" },
     { name: "Twoje lekcje", path: "/learning" },
   ];
 
@@ -14,7 +14,7 @@ export const Navigation = () => {
     <nav className="px-32 nav flex">
       <img src={logo} className="w-12 h-12 mr-12" alt="logo" />
       <ul className="flex gap-12 items-center">
-        {navItems.map((item) => {
+        {navItems.map(item => {
           return (
             <>
               <div className="flex gap-2">
@@ -22,9 +22,7 @@ export const Navigation = () => {
                 <li className="flex items-center  h-8 text-nowrap">
                   <NavLink
                     className={({ isActive }) => {
-                      const textColor = isActive
-                        ? "text-blue-custom"
-                        : "text-black";
+                      const textColor = isActive ? "text-blue-custom" : "text-black";
 
                       return `${textColor} flex uppercase items-center justify-center h-full w-full`;
                     }}

@@ -4,6 +4,7 @@ import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart
 import { useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Navigation } from "@/components/Navigation/Navigation";
 
 const STATIC_PATH_NODES = [{ node: 10 }, { node: 17 }, { node: 13 }];
 const PATH_LENGTH = 12;
@@ -139,6 +140,10 @@ export default function Tree() {
 
   return (
     <div className="max-w-full">
+      <header className="header">
+        <Navigation />
+      </header>
+
       <div className="p-4 mx-28 border-b-2 border-blue-800">
         <ToggleGroup variant="outline" type="single">
           {changePathButtons.map((button, index) => (
