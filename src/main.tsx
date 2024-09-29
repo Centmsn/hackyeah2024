@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Learning from "./pages/learning.tsx";
+import Tree from "./pages/Tree.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,10 +15,10 @@ const router = createBrowserRouter([
     path: "/learning",
     element: <Learning />,
   },
-  // {
-  //   path: "/tree",
-  //   element: <Tree />,
-  // },
+  {
+    path: "/paths",
+    element: <Tree />,
+  },
 ]);
 
 createRoot(document.getElementById("root")!).render(
