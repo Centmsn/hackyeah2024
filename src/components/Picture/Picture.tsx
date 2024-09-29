@@ -1,6 +1,11 @@
 import React from "react";
-import "./Navigation.css";
+import "./Picture.css";
 
 export const Picture: React.FC = () => {
-  return <img src="./chenik.png" />;
+  return (
+    <>
+      <img src="./chenik.png" />
+      <div className="title">ŚCIEŻKA SZALONY CHEMIK</div>
+    </>
+  );
 };
