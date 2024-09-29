@@ -1,5 +1,7 @@
 import { Navigation } from "./components/Navigation/Navigation.js";
 import { Progress } from "@/components/ui/progress";
+import { Navigation } from "./components/Navigation/Navigation.js";
+import { Progress } from "@/components/ui/progress";
 import "./App.css";
 import pic from "./components/Picture/chemik.png";
 
