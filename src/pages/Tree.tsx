@@ -1,10 +1,6 @@
 import { Line, LineChart } from "recharts";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-} from "@/components/ui/chart";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -28,11 +24,7 @@ const PATH_LENGTH = 12;
 const ACTIVE_PATH_STROKE_WIDTH = 4;
 const INACTIVE_PATH_STROKE_WIDTH = 2;
 const alternativePathAmount = getNumberFromRange(3, 4);
-const changePathButtons = [
-  "Droga numer 1",
-  "Droga numer 2",
-  "Droga numer 3",
-].slice(0, alternativePathAmount);
+const changePathButtons = ["Droga numer 1", "Droga numer 2", "Droga numer 3"].slice(0, alternativePathAmount);
 
 const pathThemes = [
   [Leaf, Flower, Flower2, Keyboard, Brain], // Nature theme
@@ -77,9 +69,7 @@ function generateChartData() {
     for (let j = 0; j < alternativePathAmount; j++) {
       pathNodes[i] = {
         ...pathNodes[i],
-        [`alternativePath-${j}`]: isFirstCommonNode
-          ? STATIC_PATH_NODES[i].node
-          : getNumberFromRange(0, 25),
+        [`alternativePath-${j}`]: isFirstCommonNode ? STATIC_PATH_NODES[i].node : getNumberFromRange(0, 25),
       };
     }
   }
@@ -105,9 +95,7 @@ function generateChartData() {
 
 export default function Tree() {
   const [activePathIndex, setActivePathIndex] = useState<number>(0);
-  const [highlightedPathIndex, setHightlightedPathIndex] = useState<
-    number | null
-  >(null);
+  const [highlightedPathIndex, setHightlightedPathIndex] = useState<number | null>(null);
   const chartData = useRef(generateChartData());
 
   function handleHighlightPath(index: number | null) {
@@ -142,33 +130,15 @@ export default function Tree() {
           dataKey={i === 0 ? "node" : `alternativePath-${i}`}
           type="step"
           className={isHighlighted || isActivePath ? "z-40" : ""}
-          stroke={
-            isActivePath
-              ? "rgb(50, 120, 200)"
-              : isHighlighted
-              ? "gray"
-              : "lightgray"
-          }
+          stroke={isActivePath ? "rgb(50, 120, 200)" : isHighlighted ? "gray" : "lightgray"}
           onMouseEnter={() => handleHighlightPath(i)}
           onMouseLeave={() => handleHighlightPath(null)}
-          strokeWidth={
-            isActivePath ? ACTIVE_PATH_STROKE_WIDTH : INACTIVE_PATH_STROKE_WIDTH
-          }
+          strokeWidth={isActivePath ? ACTIVE_PATH_STROKE_WIDTH : INACTIVE_PATH_STROKE_WIDTH}
           dot={({ cx, cy, index }) => {
             const Icon = getNodeIcon(i, index);
-            const iconColor = isActivePath
-              ? index < STATIC_PATH_NODES.length
-                ? "white"
-                : "#1139ff"
-              : "lightgray";
-            const circleColor = isActivePath
-              ? index < STATIC_PATH_NODES.length
-                ? "#1139ff"
-                : "white"
-              : "white";
-            const strokeColor = isActivePath
-              ? "rgb(50, 120, 200)"
-              : "lightgray";
+            const iconColor = isActivePath ? (index < STATIC_PATH_NODES.length ? "white" : "#1139ff") : "lightgray";
+            const circleColor = isActivePath ? (index < STATIC_PATH_NODES.length ? "#1139ff" : "white") : "white";
+            const strokeColor = isActivePath ? "rgb(50, 120, 200)" : "lightgray";
 
             return (
               <g>
@@ -181,13 +151,7 @@ export default function Tree() {
                   cx={cx}
                   cy={cy}
                 />
-                <Icon
-                  x={cx - 8}
-                  y={cy - 8}
-                  width={16}
-                  height={16}
-                  color={iconColor}
-                />
+                <Icon x={cx - 8} y={cy - 8} width={16} height={16} color={iconColor} />
               </g>
             );
           }}
@@ -233,7 +197,7 @@ export default function Tree() {
             variant="outline"
             type="single"
             value={activePathIndex.toString()}
-            onValueChange={(value) => handleOnPathChange(parseInt(value))}
+            onValueChange={value => handleOnPathChange(parseInt(value))}
             className="justify-start"
           >
             {changePathButtons.map((button, index) => (
@@ -250,10 +214,7 @@ export default function Tree() {
         </div>
 
         <div className="min-w-full px-12">
-          <ChartContainer
-            className="max-h-[600px] w-full"
-            config={generateCharConfig()}
-          >
+          <ChartContainer className="max-h-[600px] w-full" config={generateCharConfig()}>
             <LineChart
               accessibilityLayer
               data={chartData.current}
@@ -267,35 +228,31 @@ export default function Tree() {
                 cursor={false}
                 content={
                   <Card>
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-between pr-10">
                       <CardHeader className="text-2xl py-2">Test</CardHeader>
-                      <Badge>Badge</Badge>
+                      <Badge className="bg-green-custom text-black">Badge</Badge>
                     </div>
                     <CardContent className="w-[300px]">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Deserunt, optio.
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, optio.
                     </CardContent>
                     <CardHeader className="text-2xl py-2">Test</CardHeader>
                     <CardContent className="w-[300px]">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Deserunt, optio.
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, optio.
                     </CardContent>
-                    <div className="flex items-center gap-2 justify-center">
+                    <div className="flex items-center justify-between pr-10">
                       <CardHeader className="text-2xl py-2">Test</CardHeader>
                       <Badge>Badge</Badge>
                     </div>
                     <CardContent className="w-[300px]">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Deserunt, optio.
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, optio.
                     </CardContent>
-                    <div className="flex items-center gap-2 justify-center">
+                    <div className="flex items-center justify-between pr-10">
                       <CardHeader className="text-2xl py-2">Test</CardHeader>
                       <Badge>Badge</Badge>
-                      <Badge>Badge</Badge>
+                      <Badge className="bg-green-custom text-black">Badge</Badge>
                     </div>
                     <CardContent className="w-[300px]">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Deserunt, optio.
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, optio.
                     </CardContent>
                   </Card>
                 }
