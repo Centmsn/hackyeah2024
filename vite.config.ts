@@ -16,4 +16,5 @@ export default defineConfig({
       plugins: [tailwindcss, autoprefixer],
     },
   },
+  base: "/hackyeah2024/",
 });
