@@ -76,22 +76,28 @@ export const App = () => {
           <img
             src={pic}
             width="500px"
-            className="absolute top-[-2%] left-[42%] "
+            className="absolute top-[-2%] left-[46%] "
           />
         </section>
 
-        <section className="z-10 w-full flex  items-end gap-y-10  flex-col">
+        <section className="z-10 pt-12 w-full flex  items-end gap-y-6  flex-col">
           <div className="flex  items-center gap-x-6">
             <span className="text-xl uppercase  text-black">
-              achievement badge
+              Odznaka za osiągnięcie
             </span>
-            <img src={Badge} className="h-20 w-20" />
+            <img src={Badge} className="h-12 w-12" />
           </div>
           <div className="flex  items-center gap-x-6">
             <span className="text-xl uppercase  text-black">
-              achievement badge
+              Odznaka za osiągnięcie
             </span>
-            <img src={Badge1} className="h-20 w-20" />
+            <img src={Badge} className="h-12 w-12" />
+          </div>
+          <div className="flex  items-center gap-x-6">
+            <span className="text-xl uppercase  text-black">
+              Odznaka za osiągnięcie
+            </span>
+            <img src={Badge1} className="h-12 w-12" />
           </div>
         </section>
       </div>
