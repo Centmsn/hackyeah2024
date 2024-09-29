@@ -1,14 +1,7 @@
 import { useState } from "react";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-} from "@/components/ui/chart";
+import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { DotProps, Line, LineChart, TooltipProps, XAxis } from "recharts";
-import {
-  NameType,
-  ValueType,
-} from "recharts/types/component/DefaultTooltipContent";
+import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight } from "lucide-react";
@@ -119,9 +112,7 @@ const chartData = [
 
 export default function Learning() {
   const [activeDot, setActiveDot] = useState<number>(0);
-  const [activeDotTitle, setActiveDotTitle] = useState<string>(
-    chartData[2].month
-  );
+  const [activeDotTitle, setActiveDotTitle] = useState<string>(chartData[2].month);
 
   const chartConfig: ChartConfig = {
     desktop: {
@@ -157,7 +148,7 @@ export default function Learning() {
 
     return (
       <circle
-        r={30}
+        r={15}
         cx={cx}
         cy={cy}
         fill={fill}
@@ -166,8 +157,8 @@ export default function Learning() {
         style={{
           transition: "all 300ms ease-in-out",
         }}
-        onMouseEnter={(e) => {
-          e.currentTarget.setAttribute("r", "30");
+        onMouseEnter={e => {
+          e.currentTarget.setAttribute("r", "15");
           e.currentTarget.setAttribute("stroke-width", "6");
           e.currentTarget.setAttribute("fill", hoverFill);
           e.currentTarget.setAttribute("stroke", hoverStroke);
@@ -176,8 +167,8 @@ export default function Learning() {
           setActiveDot(index);
           setActiveDotTitle(chartData[index].month);
         }}
-        onMouseLeave={(e) => {
-          e.currentTarget.setAttribute("r", "30");
+        onMouseLeave={e => {
+          e.currentTarget.setAttribute("r", "15");
           e.currentTarget.setAttribute("stroke-width", "4");
           e.currentTarget.setAttribute("fill", fill);
           e.currentTarget.setAttribute("stroke", stroke);
@@ -186,25 +177,15 @@ export default function Learning() {
     );
   };
 
-  const CustomTooltip = ({
-    active,
-    payload,
-    label,
-  }: TooltipProps<ValueType, NameType>) => {
-    const dataPoint = chartData.find((item) => item.month === label);
+  const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
+    const dataPoint = chartData.find(item => item.month === label);
 
     if (active && payload && payload.length && dataPoint) {
       return (
         <div className="bg-green-custom-light p-2 border border-gray-300 rounded shadow">
-          <p className="font-bold text-black mb-4 text-base uppercase">
-            {label}
-          </p>
+          <p className="font-bold text-black mb-4 text-base uppercase">{label}</p>
           {dataPoint.materials.map((material, index) => (
-            <p
-              key={index}
-              className="text-sm font-bold uppercase"
-              style={{ color: material.color }}
-            >
+            <p key={index} className="text-sm font-bold uppercase" style={{ color: material.color }}>
               {material.text}
             </p>
           ))}
@@ -219,9 +200,8 @@ export default function Learning() {
     const lorem =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
-    return Array.from({ length: 6 }, (_, i) => {
-      const randomIconName =
-        iconNames[Math.floor((seed * (i + 1) * 13) % iconNames.length)];
+    return Array.from({ length: 3 }, (_, i) => {
+      const randomIconName = iconNames[Math.floor((seed * (i + 1) * 13) % iconNames.length)];
       const IconComponent = LucideIcons[
         randomIconName as keyof typeof LucideIcons
       ] as React.ComponentType<LucideIcons.LucideProps>;
@@ -229,10 +209,7 @@ export default function Learning() {
       const content = lorem.slice(Math.floor(Math.random() * 100));
 
       return (
-        <Card
-          key={`${seed}-${i}`}
-          className="w-[450px] group rounded-xl hover:bg-green-custom-light"
-        >
+        <Card key={`${seed}-${i}`} className="w-[450px] group rounded-xl hover:bg-green-custom-light">
           <CardHeader className="uppercase flex flex-row group-hover:text-black text-white bg-blue-custom group-hover:bg-green-custom h-10 items-center gap-2">
             <IconComponent className="w-8 h-8" />
             <CardTitle className="text-base">{title}</CardTitle>
@@ -253,10 +230,7 @@ export default function Learning() {
           <section className="flex items-center justify-center">
             <div className="flex gap-4 items-center">
               <div className="w-[1400px] h-[145px] overflow-x-scroll scrollbar-none">
-                <ChartContainer
-                  className="w-[2400px] h-[145px]"
-                  config={chartConfig}
-                >
+                <ChartContainer className="w-[2400px] h-[145px]" config={chartConfig}>
                   <LineChart
                     accessibilityLayer
                     data={chartData}
@@ -267,15 +241,7 @@ export default function Learning() {
                   >
                     <ChartTooltip cursor={false} content={<CustomTooltip />} />
                     <XAxis dataKey="month" hide />
-                    <Line
-                      dataKey="desktop"
-                      type="monotone"
-                      stroke="black"
-                      strokeWidth={4}
-                      dot={customDot}
-                      fill="#222"
-                      r={30}
-                    />
+                    <Line dataKey="desktop" type="step" stroke="black" strokeWidth={4} dot={customDot} fill="#222" />
                   </LineChart>
                 </ChartContainer>
               </div>
@@ -284,12 +250,11 @@ export default function Learning() {
         </div>
         <div className="flex gap-4 items-center pl-32 w-full ">
           <ChevronRight className="w-12 h-12 text-blue-custom" />
-          <h2 className="text-2xl text-nowrap text-blue-custom font-bold">
-            {activeDotTitle}
-          </h2>
+          <h2 className="text-2xl text-nowrap text-blue-custom font-bold">{activeDotTitle}</h2>
         </div>
-        <section className="flex flex-wrap pl-32  gap-12">
-          {generateRandomCards(activeDot)}
+        <section className="pl-32 flex flex-col gap-12">
+          <div className="gap-12 flex">{generateRandomCards(activeDot)}</div>
+          <div className="gap-12 flex">{generateRandomCards(activeDot)}</div>
         </section>
       </div>
     </>
