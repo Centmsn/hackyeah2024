@@ -12,10 +12,11 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import * as LucideIcons from "lucide-react";
 import { ChevronRight } from "lucide-react";
+import { Navigation } from "@/components/Navigation/Navigation";
 
 const chartData = [
   {
-    title: "Zaliczony dział",
+    month: "Zaliczony dział",
     desktop: 2,
     materials: [
       { text: "Start of your journey", color: "#00ff91" },
@@ -25,7 +26,7 @@ const chartData = [
     ],
   },
   {
-    title: "Inny zaliczony dział",
+    month: "Inny zaliczony dział",
     desktop: 5,
     materials: [
       { text: "Start of your journey", color: "#00ff91" },
@@ -35,7 +36,7 @@ const chartData = [
     ],
   },
   {
-    title: "Aktualny dział",
+    month: "Aktualny dział",
     desktop: 3,
     materials: [
       { text: "Start of your journey", color: "#00ff91" },
@@ -45,7 +46,7 @@ const chartData = [
     ],
   },
   {
-    title: "Następny dział",
+    month: "Następny dział",
     desktop: 5,
     materials: [
       { text: "Start of your journey", color: "#fc005b" },
@@ -55,7 +56,7 @@ const chartData = [
     ],
   },
   {
-    title: "Przyszły dział",
+    month: "Przyszły dział",
     desktop: 5,
     materials: [
       { text: "Start of your journey", color: "#fc005b" },
@@ -65,7 +66,7 @@ const chartData = [
     ],
   },
   {
-    title: "Przyszły dział",
+    month: "Przyszły dział",
     desktop: 3,
     materials: [
       { text: "Start of your journey", color: "#fc005b" },
@@ -75,7 +76,7 @@ const chartData = [
     ],
   },
   {
-    title: "Przyszły dział",
+    month: "Przyszły dział",
     desktop: 4,
     materials: [
       { text: "Start of your journey", color: "#fc005b" },
@@ -85,7 +86,7 @@ const chartData = [
     ],
   },
   {
-    title: "Przyszły dział",
+    month: "Przyszły dział",
     desktop: 2,
     materials: [
       { text: "Start of your journey", color: "#fc005b" },
@@ -95,7 +96,7 @@ const chartData = [
     ],
   },
   {
-    title: "Przyszły dział",
+    month: "Przyszły dział",
     desktop: 5,
     materials: [
       { text: "Start of your journey", color: "#fc005b" },
@@ -105,7 +106,7 @@ const chartData = [
     ],
   },
   {
-    title: "Przyszły dział",
+    month: "Przyszły dział",
     desktop: 3,
     materials: [
       { text: "Start of your journey", color: "#fc005b" },
@@ -119,7 +120,7 @@ const chartData = [
 export default function Learning() {
   const [activeDot, setActiveDot] = useState<number>(0);
   const [activeDotTitle, setActiveDotTitle] = useState<string>(
-    chartData[2].title
+    chartData[2].month
   );
 
   const chartConfig: ChartConfig = {
@@ -173,7 +174,7 @@ export default function Learning() {
         }}
         onClick={() => {
           setActiveDot(index);
-          setActiveDotTitle(chartData[index].title);
+          setActiveDotTitle(chartData[index].month);
         }}
         onMouseLeave={(e) => {
           e.currentTarget.setAttribute("r", "30");
@@ -190,16 +191,18 @@ export default function Learning() {
     payload,
     label,
   }: TooltipProps<ValueType, NameType>) => {
-    const dataPoint = chartData.find((item) => item.title === label);
+    const dataPoint = chartData.find((item) => item.month === label);
 
     if (active && payload && payload.length && dataPoint) {
       return (
         <div className="bg-green-custom-light p-2 border border-gray-300 rounded shadow">
-          <p className="font-bold text-black mb-4 text-base">{label}</p>
+          <p className="font-bold text-black mb-4 text-base uppercase">
+            {label}
+          </p>
           {dataPoint.materials.map((material, index) => (
             <p
               key={index}
-              className="text-sm font-extrabold"
+              className="text-sm font-bold uppercase"
               style={{ color: material.color }}
             >
               {material.text}
@@ -223,19 +226,19 @@ export default function Learning() {
         randomIconName as keyof typeof LucideIcons
       ] as React.ComponentType<LucideIcons.LucideProps>;
       const title = `Materiały szkoleniowe`;
-      const content = lorem;
+      const content = lorem.slice(Math.floor(Math.random() * 100));
 
       return (
         <Card
           key={`${seed}-${i}`}
           className="w-[450px] group rounded-xl hover:bg-green-custom-light"
         >
-          <CardHeader className="flex flex-row group-hover:text-black text-white bg-blue-custom group-hover:bg-green-custom h-10 items-center gap-2">
+          <CardHeader className="uppercase flex flex-row group-hover:text-black text-white bg-blue-custom group-hover:bg-green-custom h-10 items-center gap-2">
             <IconComponent className="w-8 h-8" />
-            <CardTitle>{title}</CardTitle>
+            <CardTitle className="text-base">{title}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-left p-6 ">{content}</p>
+            <p className="text-left p-6 uppercase text-sm">{content}</p>
           </CardContent>
         </Card>
       );
@@ -243,49 +246,52 @@ export default function Learning() {
   };
 
   return (
-    <div className="flex flex-col gap-4 gap-y-20  h-screen w-screen overflow-hidden ">
-      <div className="flex pl-32">
-        <section className="flex items-center justify-center">
-          <div className="flex gap-4 items-center">
-            <div className="w-[1400px] h-[145px] overflow-x-scroll scrollbar-none">
-              <ChartContainer
-                className="w-[2400px] h-[145px]"
-                config={chartConfig}
-              >
-                <LineChart
-                  accessibilityLayer
-                  data={chartData}
-                  margin={{
-                    left: 32,
-                    right: 12,
-                  }}
+    <>
+      <Navigation />
+      <div className="flex mt-12 flex-col gap-4 gap-y-12 w-screen overflow-hidden ">
+        <div className="flex pl-32">
+          <section className="flex items-center justify-center">
+            <div className="flex gap-4 items-center">
+              <div className="w-[1400px] h-[145px] overflow-x-scroll scrollbar-none">
+                <ChartContainer
+                  className="w-[2400px] h-[145px]"
+                  config={chartConfig}
                 >
-                  <ChartTooltip cursor={false} content={<CustomTooltip />} />
-                  <XAxis dataKey="month" hide />
-                  <Line
-                    dataKey="desktop"
-                    type="monotone"
-                    stroke="black"
-                    strokeWidth={4}
-                    dot={customDot}
-                    fill="#222"
-                    r={30}
-                  />
-                </LineChart>
-              </ChartContainer>
+                  <LineChart
+                    accessibilityLayer
+                    data={chartData}
+                    margin={{
+                      left: 32,
+                      right: 12,
+                    }}
+                  >
+                    <ChartTooltip cursor={false} content={<CustomTooltip />} />
+                    <XAxis dataKey="month" hide />
+                    <Line
+                      dataKey="desktop"
+                      type="monotone"
+                      stroke="black"
+                      strokeWidth={4}
+                      dot={customDot}
+                      fill="#222"
+                      r={30}
+                    />
+                  </LineChart>
+                </ChartContainer>
+              </div>
             </div>
-          </div>
+          </section>
+        </div>
+        <div className="flex gap-4 items-center pl-32 w-full ">
+          <ChevronRight className="w-12 h-12 text-blue-custom" />
+          <h2 className="text-2xl text-nowrap text-blue-custom font-bold">
+            {activeDotTitle}
+          </h2>
+        </div>
+        <section className="flex flex-wrap pl-32  gap-12">
+          {generateRandomCards(activeDot)}
         </section>
       </div>
-      <div className="flex gap-4 items-center pl-32 w-full ">
-        <ChevronRight className="w-12 h-12 text-blue-custom" />
-        <h2 className="text-2xl text-nowrap text-blue-custom font-bold">
-          {activeDotTitle}
-        </h2>
-      </div>
-      <section className="flex flex-wrap pl-32  gap-16">
-        {generateRandomCards(activeDot)}
-      </section>
-    </div>
+    </>
   );
 }
