@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react";
 export const Navigation = () => {
   const navItems = [
     { name: "Twoja karta", path: "/" },
-    { name: "Ścieżki rozwoju", path: "/" },
+    { name: "Ścieżki rozwoju", path: "/tree" },
     { name: "Twoje lekcje", path: "/learning" },
   ];
 
