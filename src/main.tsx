@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Learning />,
   },
   {
-    path: "/paths",
+    path: "/tree",
     element: <Tree />,
   },
 ]);
