@@ -222,6 +222,7 @@ export default function Tree() {
                 top: 24,
                 left: 24,
                 right: 24,
+                bottom: 24,
               }}
             >
               <ChartTooltip
